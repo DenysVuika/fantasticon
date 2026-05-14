@@ -52,7 +52,6 @@
   ],
   "prepublish": "build",
   "dependencies": {
-    "case": "^1.6.3",
     "cli-color": "^2.0.4",
     "commander": "^14.0.2",
     "glob": "^13.0.0",

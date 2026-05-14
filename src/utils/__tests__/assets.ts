@@ -3,6 +3,7 @@ import { loadPaths, loadAssets, writeAssets } from '../assets';
 import { DEFAULT_OPTIONS } from '../../constants';
 import { GetIconIdFn } from '../../types/misc';
 import { writeFile } from '../fs-async';
+import { getLastOptions } from '../../__mocks__/glob';
 
 const writeFileMock = writeFile as any as Mock;
 
@@ -44,6 +45,14 @@ describe('Assets utilities', () => {
       await expect(loadPaths('./invalid')).rejects.toEqual(
         new Error('Invalid glob: ./invalid/**/*.svg')
       );
+    });
+
+    it('passes windowsPathsNoEscape and posix options to glob for Windows compatibility', async () => {
+      await loadPaths('./valid');
+      const options = getLastOptions();
+
+      expect(options.windowsPathsNoEscape).toBe(true);
+      expect(options.posix).toBe(true);
     });
 
     it('throws when path contains no SVG assets', async () => {

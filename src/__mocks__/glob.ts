@@ -8,14 +8,24 @@ const MOCK_GLOBS: Record<string, string[]> = {
   './empty/**/*.svg': []
 };
 
-const glob = async (glob: string, _: {}) => {
-  const paths = MOCK_GLOBS[glob];
+export type GlobOptions = {
+  windowsPathsNoEscape?: boolean;
+  posix?: boolean;
+};
+
+let lastOptions: GlobOptions = {};
+
+const glob = async (pattern: string, options: GlobOptions = {}) => {
+  lastOptions = options;
+  const paths = MOCK_GLOBS[pattern];
 
   if (!paths) {
-    throw new Error(`Invalid glob: ${glob}`);
+    throw new Error(`Invalid glob: ${pattern}`);
   }
 
   return paths;
 };
 
-export { glob };
+const getLastOptions = () => lastOptions;
+
+export { glob, getLastOptions };

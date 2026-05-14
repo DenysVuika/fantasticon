@@ -41,7 +41,7 @@
     "build:esm": "tsc --project ./tsconfig.json && npm run build:package:esm",
     "watch": "npm run ts -- --watch",
     "typecheck": "tsc --noEmit --project tsconfig.test.json --noEmit",
-    "lint": "prettier --check .",
+    "lint": "oxlint && prettier --check .",
     "fix": "prettier --write ."
   },
   "files": [
@@ -72,6 +72,7 @@
     "@types/ttf2eot": "^2.0.2",
     "@types/ttf2woff": "^2.0.4",
     "@types/ttf2woff2": "^6.0.0",
+    "oxlint": "^1.64.0",
     "prettier": "^3.8.3",
     "rimraf": "^6.1.3",
     "semantic-release": "^25.0.3",

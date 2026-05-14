@@ -56,7 +56,7 @@
     "cli-color": "^2.0.4",
     "commander": "^14.0.2",
     "glob": "^13.0.6",
-    "handlebars": "^4.7.8",
+    "handlebars": "^4.7.9",
     "slugify": "^1.6.9",
     "svg2ttf": "^6.1.0",
     "svgicons2svgfont": "^15.0.1",

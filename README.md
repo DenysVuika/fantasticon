@@ -8,11 +8,6 @@
   Easy-to-use, pre-configured CLI tool to generate web-font icon kits from SVG files
 </blockquote>
 
-<p align="center">
-  <img src="https://github.com/tancredi/fantasticon/workflows/Test/badge.svg" alt="Test status">
-  <img src="https://github.com/tancredi/fantasticon/workflows/Release/badge.svg" alt="Release status">
-</p>
-
 ### Intro
 
 Icon-font generation, easy to use and highly configurable.
@@ -22,7 +17,7 @@ It also generates TypeScript types, JSON maps of the generated code-points, allo
 ### Install
 
 ```bash
-npm install -g fantasticon
+npm install -g @denysvuika/fantasticon
 ```
 
 ## Use
@@ -135,7 +130,7 @@ module.exports = {
 #### Simple usage
 
 ```ts
-import { generateFonts } from 'fantasticon';
+import { generateFonts } from '@denysvuika/fantasticon';
 
 const results = await generateFonts();
 
@@ -145,7 +140,7 @@ console.log('Done', results);
 #### Options
 
 ```js
-import { generateFonts } from 'fantasticon';
+import { generateFonts } from '@denysvuika/fantasticon';
 
 generateFonts({
   name: 'icons',
@@ -214,3 +209,11 @@ PRs are always welcome. If you need help questions, want to bounce ideas or just
 ### License
 
 Copyright (c) 2026 Tancredi Trugenberger. - Released under the [MIT license](https://github.com/tancredi/fantasticon/blob/master/LICENSE)
+
+---
+
+### Fork Notice
+
+This package (`@denysvuika/fantasticon`) is a fork of [fantasticon](https://github.com/tancredi/fantasticon) by **Tancredi Trugenberger Ltd**, maintained to address security issues and keep the project up to date.
+
+The original project is released under the [MIT license](https://github.com/tancredi/fantasticon/blob/master/LICENSE). This fork continues under the same license.

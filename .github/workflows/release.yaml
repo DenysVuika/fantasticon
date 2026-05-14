@@ -10,7 +10,7 @@ env:
 
 jobs:
   release:
-    if: "!contains(github.event.head_commit.message, 'skip ci') && github.repository == 'tancredi/fantasticon'"
+    if: "!contains(github.event.head_commit.message, 'skip ci')"
     name: Release
     permissions:
       id-token: write

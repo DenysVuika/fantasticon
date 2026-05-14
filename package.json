@@ -1,10 +1,10 @@
 {
-  "name": "fantasticon",
+  "name": "@denysvuika/fantasticon",
   "version": "0.0.0",
   "description": "Icon font generation tool",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tancredi/fantasticon.git"
+    "url": "git+https://github.com/DenysVuika/fantasticon.git"
   },
   "keywords": [
     "icons",
@@ -13,11 +13,11 @@
     "svg",
     "vector"
   ],
-  "author": "Tancredi Trugenberger",
+  "author": "Denys Vuika",
   "bugs": {
-    "url": "https://github.com/tancredi/fantasticon/issues"
+    "url": "https://github.com/DenysVuika/fantasticon/issues"
   },
-  "homepage": "https://github.com/tancredi/fantasticon#readme",
+  "homepage": "https://github.com/DenysVuika/fantasticon#readme",
   "type": "module",
   "exports": {
     "require": "./dist/index.cjs",

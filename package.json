@@ -52,7 +52,6 @@
   ],
   "prepublish": "build",
   "dependencies": {
-    "cli-color": "^2.0.4",
     "commander": "^14.0.3",
     "glob": "^13.0.6",
     "handlebars": "^4.7.9",
@@ -64,7 +63,6 @@
     "ttf2woff2": "^8.0.0"
   },
   "devDependencies": {
-    "@types/cli-color": "^2.0.6",
     "@types/glob": "^9.0.0",
     "@types/node": "^25.8.0",
     "@types/svg2ttf": "^5.0.3",

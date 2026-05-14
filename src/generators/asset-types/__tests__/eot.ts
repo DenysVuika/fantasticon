@@ -9,8 +9,7 @@ vi.mock('ttf2eot', () => ({
   default: vi.fn(content => ({ buffer: `::eot(${content})::` }))
 }));
 
-const mockOptions = (eotOptions = { __mock: 'options__' } as any) =>
-  ({}) as unknown as FontGeneratorOptions;
+const mockOptions = () => ({}) as unknown as FontGeneratorOptions;
 
 const ttf = '::ttf::' as unknown as Buffer;
 
@@ -27,7 +26,7 @@ describe('`EOT` font generator', () => {
   });
 
   it('passes correctly format options to `ttf2eot`', async () => {
-    await eotGen.generate(mockOptions({}), ttf);
+    await eotGen.generate(mockOptions(), ttf);
     expect(ttf2eot).toHaveBeenCalledTimes(1);
   });
 });

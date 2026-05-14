@@ -46,7 +46,7 @@ export const listMembersParser =
     return values as T[];
   };
 
-export const removeUndefined = (object: Object) => {
+export const removeUndefined = (object: Record<string, any>) => {
   for (const key of Object.keys(object)) {
     if (typeof object[key] === 'undefined') {
       delete object[key];

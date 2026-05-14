@@ -194,17 +194,9 @@ And the generated icon IDs would be:
 
 You can provide a `getIconId` function via the configuration file to customize how the icon IDs / CSS selectors are derived from the filepath. The function will receive relative paths to the icon and the input directory as arguments, and must return a unique string to be used as the ID.
 
-### Support
-
-The library is currently actively maintained for for Node 16.x.x support or above
-
-### Contribute
-
-PRs are always welcome. If you need help questions, want to bounce ideas or just say hi, [join the Discord channel](https://discord.gg/BXAY3Kc3mp).
-
 ### License
 
-Copyright (c) 2026 Tancredi Trugenberger. - Released under the [MIT license](https://github.com/tancredi/fantasticon/blob/master/LICENSE)
+Copyright (c) 2026 Denys Vuika. - Released under the [MIT license](https://github.com/DenysVuika/fantasticon/blob/master/LICENSE)
 
 ---
 

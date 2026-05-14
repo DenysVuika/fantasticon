@@ -1,16 +1,14 @@
-<h2 align="center">Fantasticon</h2>
+# Fantasticon
 
-<blockquote align="center">
-  Easy-to-use, pre-configured CLI tool to generate web-font icon kits from SVG files
-</blockquote>
+Easy-to-use, pre-configured CLI tool to generate web-font icon kits from SVG files
 
-### Intro
+## Intro
 
 Icon-font generation, easy to use and highly configurable.
 
 It also generates TypeScript types, JSON maps of the generated code-points, allowing for a great deal of different usages, e.g. integrating with React type-safe icon components or integration on mobile apps by just combining TTF and JSON generation.
 
-### Install
+## Install
 
 ```bash
 npm install -g @denysvuika/fantasticon

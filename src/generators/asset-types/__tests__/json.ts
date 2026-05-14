@@ -1,7 +1,7 @@
 import jsonGen from '../json';
 import { OtherAssetType } from '../../../types/misc';
 import { DEFAULT_OPTIONS } from '../../../constants';
-import { vi, it, describe, beforeEach, expect, Mock } from 'vitest';
+import { vi, it, describe, expect } from 'vitest';
 
 const mockCodepoints = { foo: 'oof', bar: 'baz' };
 

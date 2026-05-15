@@ -7,7 +7,7 @@ exports[`\`CSS\` asset generator > renders CSS correctly with \`selector\` optio
 }
 
 .my-selector:before {
-    font-family: test-font !important;
+    font-family: "test-font" !important;
     font-style: normal;
     font-weight: normal !important;
     font-variant: normal;
@@ -30,7 +30,7 @@ exports[`\`CSS\` asset generator > renders CSS correctly with prefix and tag nam
 }
 
 b[class^="tf-"]:before, b[class*=" tf-"]:before {
-    font-family: test-font !important;
+    font-family: "test-font" !important;
     font-style: normal;
     font-weight: normal !important;
     font-variant: normal;

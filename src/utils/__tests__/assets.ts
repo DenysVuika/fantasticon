@@ -34,10 +34,18 @@ describe('Assets utilities', () => {
 
     it('resolves an Array of the correct filepaths within the given directory', async () => {
       expect(await loadPaths('./valid')).toEqual([
-        '/project/valid/foo.svg',
         '/project/valid/bar.svg',
+        '/project/valid/foo.svg',
         '/project/valid/sub/nested.svg',
         '/project/valid/sub/sub/nested.svg'
+      ]);
+    });
+
+    it('returns sorted filepaths for deterministic generation order', async () => {
+      expect(await loadPaths('./unsorted')).toEqual([
+        '/project/unsorted/apple.svg',
+        '/project/unsorted/mango.svg',
+        '/project/unsorted/zebra.svg'
       ]);
     });
 
@@ -71,15 +79,15 @@ describe('Assets utilities', () => {
           outputDir: './output'
         })
       ).toEqual({
-        foo: {
-          relativePath: 'foo.svg',
-          absolutePath: '/root/project/valid/foo.svg',
-          id: 'foo'
-        },
         bar: {
           relativePath: 'bar.svg',
           absolutePath: '/root/project/valid/bar.svg',
           id: 'bar'
+        },
+        foo: {
+          relativePath: 'foo.svg',
+          absolutePath: '/root/project/valid/foo.svg',
+          id: 'foo'
         },
         'sub-nested': {
           relativePath: 'sub/nested.svg',
@@ -110,15 +118,15 @@ describe('Assets utilities', () => {
           getIconId
         })
       ).toEqual({
-        '0_foo': {
-          relativePath: 'foo.svg',
-          absolutePath: '/root/project/valid/foo.svg',
-          id: '0_foo'
-        },
-        '1_bar': {
+        '0_bar': {
           relativePath: 'bar.svg',
           absolutePath: '/root/project/valid/bar.svg',
-          id: '1_bar'
+          id: '0_bar'
+        },
+        '1_foo': {
+          relativePath: 'foo.svg',
+          absolutePath: '/root/project/valid/foo.svg',
+          id: '1_foo'
         },
         '2_sub_nested': {
           relativePath: 'sub/nested.svg',
@@ -135,10 +143,10 @@ describe('Assets utilities', () => {
       expect(getIconId).toHaveBeenCalledTimes(4);
 
       expect(getIconId).toHaveBeenNthCalledWith(1, {
-        basename: 'foo',
+        basename: 'bar',
         relativeDirPath: '',
-        absoluteFilePath: '/root/project/valid/foo.svg',
-        relativeFilePath: 'foo.svg',
+        absoluteFilePath: '/root/project/valid/bar.svg',
+        relativeFilePath: 'bar.svg',
         index: 0
       });
 
@@ -163,7 +171,7 @@ describe('Assets utilities', () => {
         })
       ).rejects.toEqual(
         new Error(
-          "Conflicting result from 'getIconId': 'xxx' - conflicting input files:\n  - foo.svg\n  - bar.svg"
+          "Conflicting result from 'getIconId': 'xxx' - conflicting input files:\n  - bar.svg\n  - foo.svg"
         )
       );
     });

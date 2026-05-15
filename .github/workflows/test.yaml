@@ -10,8 +10,6 @@ env:
 jobs:
   lint:
     name: Lint
-    env:
-      NODE: 24.x
 
     runs-on: ubuntu-latest
 
@@ -20,14 +18,14 @@ jobs:
 
       - uses: actions/setup-node@v6
         with:
-          node-version: '${{ env.NODE }}'
+          node-version-file: .nvmrc
 
       - uses: actions/cache@v5
         with:
           path: ~/.npm
-          key: ${{ runner.os }}-node-v${{ env.NODE }}-${{ hashFiles('package.json') }}-${{ hashFiles('package-lock.json') }}
+          key: ${{ runner.os }}-node-${{ hashFiles('.nvmrc') }}-${{ hashFiles('package.json') }}-${{ hashFiles('package-lock.json') }}
           restore-keys: |
-            ${{ runner.os }}-node-v${{ env.NODE }}-${{ hashFiles('package.json') }}-${{ hashFiles('package-lock.json') }}
+            ${{ runner.os }}-node-${{ hashFiles('.nvmrc') }}-${{ hashFiles('package.json') }}-${{ hashFiles('package-lock.json') }}
 
       - run: npm ci
 
@@ -36,7 +34,6 @@ jobs:
       - run: npm run typecheck
 
   test:
-    if: "!contains(github.event.head_commit.message, 'skip ci') || github.event_name == 'pull_request'"
     name: Test
 
     runs-on: ubuntu-latest
@@ -44,18 +41,18 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
-      - name: Use Node.js ${{ env.NODE }}
+      - name: Use Node.js from .nvmrc
         uses: actions/setup-node@v6
         with:
-          node-version: ${{ env.NODE }}
+          node-version-file: .nvmrc
 
       - uses: actions/cache@v5
         with:
           path: ~/.npm
-          key: ${{ runner.os }}-node-v${{ env.NODE }}-${{ hashFiles('package.json') }}-${{ hashFiles('package-lock.json') }}
+          key: ${{ runner.os }}-node-${{ hashFiles('.nvmrc') }}-${{ hashFiles('package.json') }}-${{ hashFiles('package-lock.json') }}
           restore-keys: |
-            ${{ runner.os }}-node-v${{ env.NODE }}-${{ hashFiles('package.json') }}-${{ hashFiles('package-lock.json') }}
-            ${{ runner.os }}-node-v${{ env.NODE }}-
+            ${{ runner.os }}-node-${{ hashFiles('.nvmrc') }}-${{ hashFiles('package.json') }}-${{ hashFiles('package-lock.json') }}
+            ${{ runner.os }}-node-${{ hashFiles('.nvmrc') }}-
 
       - run: npm ci
 

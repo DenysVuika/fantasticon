@@ -57,16 +57,14 @@
     "handlebars": "^4.7.9",
     "slugify": "^1.6.9",
     "svg2ttf": "^6.1.0",
-    "svgicons2svgfont": "^15.0.1",
+    "svgicons2svgfont": "^16.0.0",
     "ttf2eot": "^3.1.0",
     "ttf2woff": "^3.0.0",
     "wawoff2": "^2.0.1"
   },
   "devDependencies": {
-    "@types/glob": "^9.0.0",
     "@types/node": "^25.8.0",
     "@types/svg2ttf": "^5.0.3",
-    "@types/svgicons2svgfont": "^14.0.0",
     "@types/ttf2eot": "^2.0.2",
     "@types/ttf2woff": "^2.0.4",
     "@types/wawoff2": "^1.0.2",
@@ -92,6 +90,6 @@
     }
   },
   "engines": {
-    "node": ">= 22.0"
+    "node": ">= 24.14.0"
   }
 }

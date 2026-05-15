@@ -10,6 +10,15 @@ It also generates TypeScript types, JSON maps of the generated code-points, allo
 
 ## Install
 
+Fantasticon currently requires Node 24.14.0 or newer.
+
+If you use `nvm`, install and activate the project version from `.nvmrc` first:
+
+```bash
+nvm install
+nvm use
+```
+
 ```bash
 npm install -g @denysvuika/fantasticon
 ```
@@ -26,7 +35,7 @@ fantasticon my-icons -o icon-dist
 
 **Note:** Not all options can be specified through the command line - for `formatOptions`, `pathOptions`, `getIconId` and `templates` use a [configuration file](#configuration-file) or the JavaScript [API](#api).
 
-```
+```text
 Usage: fantasticon [options] [input-dir]
 
 Options:
@@ -58,7 +67,7 @@ To have more control and better readability, you can create a simple configurati
 
 By default, `fantasticon` will look for one of following files in the working directory:
 
-```
+```text
 .fantasticonrc | fantasticonrc | .fantasticonrc.json | fantasticonrc.json | .fantasticonrc.js | fantasticonrc.js
 ```
 
@@ -169,7 +178,7 @@ This allows arranging your icons in namespaces, which can be useful if a project
 
 Considering the following `./icons` input directory:
 
-```
+```text
 icons
 ├── logo.svg
 ├── social

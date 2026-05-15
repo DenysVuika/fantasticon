@@ -14,7 +14,10 @@ describe('CLI buildOptions', () => {
     };
 
     expect(
-      await buildOptions(createCommand(['./icons'], { output: './dist' }), loadedConfig)
+      await buildOptions(
+        createCommand(['./icons'], { output: './dist' }),
+        loadedConfig
+      )
     ).toEqual({
       ...loadedConfig,
       inputDir: './icons',
@@ -51,7 +54,10 @@ describe('CLI buildOptions', () => {
 
   it('merges ts double quotes into existing formatOptions', async () => {
     const loadedConfig = {
-      formatOptions: { json: { indent: 2 }, ts: { enumName: 'Foo', singleQuotes: true } }
+      formatOptions: {
+        json: { indent: 2 },
+        ts: { enumName: 'Foo', singleQuotes: true }
+      }
     };
 
     expect(

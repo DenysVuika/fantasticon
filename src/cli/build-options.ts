@@ -52,4 +52,3 @@ export const buildOptions = async (
     ...(formatOptions ? { formatOptions } : {})
   };
 };
-

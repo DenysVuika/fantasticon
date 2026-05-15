@@ -85,7 +85,9 @@ describe('`TS` asset generator', () => {
     )) as string;
 
     expect(result).toMatchSnapshot();
-    expect(result).toContain("export enum MyIconsSet {\n  Foo = 'foo',\n  Bar = 'bar',\n}");
+    expect(result).toContain(
+      "export enum MyIconsSet {\n  Foo = 'foo',\n  Bar = 'bar',\n}"
+    );
   });
 
   it('generates no key string literal type if option specifies it', async () => {

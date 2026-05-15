@@ -55,8 +55,8 @@ describe('`SASS` asset generator', () => {
   it('renders expected selector blocks', async () => {
     const sass = await sassGen.generate(mockOptions, Buffer.from(''));
 
-    expect(sass).toContain('b[class^="tf-"]:before, b[class*=" tf-"]:before');
-    expect(sass).toContain('.tf-#{$name}:before');
+    expect(sass).toContain('b[class^="tf-"]::before, b[class*=" tf-"]::before');
+    expect(sass).toContain('.tf-#{$name}::before');
   });
 
   it('renders expected variables', async () => {
@@ -72,7 +72,7 @@ describe('`SASS` asset generator', () => {
       Buffer.from('')
     );
 
-    expect(sass).toContain('.my-selector:before');
-    expect(sass).toContain('.my-selector.tf-#{$name}:before');
+    expect(sass).toContain('.my-selector::before');
+    expect(sass).toContain('.my-selector.tf-#{$name}::before');
   });
 });

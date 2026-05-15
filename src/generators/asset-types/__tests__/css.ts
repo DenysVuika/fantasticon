@@ -53,8 +53,8 @@ describe('`CSS` asset generator', () => {
   it('renders expected selector blocks', async () => {
     const css = await cssGen.generate(mockOptions, Buffer.from(''));
 
-    expect(css).toContain('b[class^="tf-"]:before, b[class*=" tf-"]:before {');
-    expect(css).toContain('.tf-my-icon:before {');
+    expect(css).toContain('b[class^="tf-"]::before, b[class*=" tf-"]::before {');
+    expect(css).toContain('.tf-my-icon::before {');
   });
 
   it('renders expected selector blocks with `selector` option', async () => {
@@ -63,7 +63,7 @@ describe('`CSS` asset generator', () => {
       Buffer.from('')
     );
 
-    expect(css).toContain('.my-selector:before {');
-    expect(css).toContain('.my-selector.tf-my-icon:before {');
+    expect(css).toContain('.my-selector::before {');
+    expect(css).toContain('.my-selector.tf-my-icon::before {');
   });
 });

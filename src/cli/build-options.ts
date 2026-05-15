@@ -27,7 +27,7 @@ export const buildOptions = async (
       : {
           ...(loadedConfig as any).formatOptions,
           ts: {
-            ...((loadedConfig as any).formatOptions?.ts || {}),
+            ...(loadedConfig as any).formatOptions?.ts,
             singleQuotes: tsQuotes === 'single'
           }
         };

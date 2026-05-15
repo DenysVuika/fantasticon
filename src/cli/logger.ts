@@ -8,16 +8,18 @@ export const getLogger = (debug = false, silent = false) => ({
 
     console.log(styleText('red', String(message)));
 
-    if (debug && error instanceof Error) {
+    if (debug && error instanceof Error && error.stack) {
       console.log(styleText('red', error.stack));
     }
   },
 
   log(...values: any[]) {
-    !silent && console.log(...values);
+    if (!silent) {
+      console.log(...values);
+    }
   },
 
-  start(loadedConfigPath: string = null) {
+  start(loadedConfigPath: string | null = null) {
     this.log(styleText('yellow', 'Generating font kit...'));
 
     if (loadedConfigPath) {

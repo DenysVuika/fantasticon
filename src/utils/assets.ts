@@ -32,7 +32,8 @@ export const loadPaths = async (dir: string): Promise<string[]> => {
     throw new Error(`No SVGs found in ${dir}`);
   }
 
-  return files;
+  // Keep icon generation deterministic across platforms/glob versions.
+  return files.sort((a, b) => a.localeCompare(b));
 };
 
 const failForConflictingId = (

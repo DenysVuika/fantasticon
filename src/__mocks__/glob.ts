@@ -5,6 +5,11 @@ const MOCK_GLOBS: Record<string, string[]> = {
     '/project/valid/sub/nested.svg',
     '/project/valid/sub/sub/nested.svg'
   ],
+  './unsorted/**/*.svg': [
+    '/project/unsorted/zebra.svg',
+    '/project/unsorted/apple.svg',
+    '/project/unsorted/mango.svg'
+  ],
   './empty/**/*.svg': []
 };
 

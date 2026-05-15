@@ -39,6 +39,7 @@ Options:
   -h, --font-height <value>    the output font height (icons will be scaled so the highest has this height) (default: 300)
   --descent <value>            the font descent
   --normalize [bool]           normalize icons by scaling them to the height of the highest icon
+  --ts-quotes <value>          generate TypeScript strings with single or double quotes (default: double)
   -r, --round [bool]           setup the SVG path rounding [10e12]
   --selector <value>           use a CSS selector instead of 'tag + prefix' (default: null)
   -p, --prefix <value>         CSS class prefix (default: icon)

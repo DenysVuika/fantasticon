@@ -79,12 +79,15 @@ describe('`TS` asset generator', () => {
   );
 
   it('generates single quotes if format option passed', async () => {
-    expect(
-      await tsGen.generate(
-        { ...mockOptions, formatOptions: { ts: { singleQuotes: true } } },
-        null
-      )
-    ).toMatchSnapshot();
+    const result = (await tsGen.generate(
+      { ...mockOptions, formatOptions: { ts: { singleQuotes: true } } },
+      null
+    )) as string;
+
+    expect(result).toMatchSnapshot();
+    expect(result).toContain(
+      "export enum MyIconsSet {\n  Foo = 'foo',\n  Bar = 'bar',\n}"
+    );
   });
 
   it('generates no key string literal type if option specifies it', async () => {

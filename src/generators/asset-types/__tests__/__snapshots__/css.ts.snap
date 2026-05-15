@@ -4,10 +4,11 @@ exports[`\`CSS\` asset generator > renders CSS correctly with \`selector\` optio
 "@font-face {
     font-family: "test-font";
     src: "::src-attr::";
+    font-display: block;
 }
 
-.my-selector:before {
-    font-family: test-font !important;
+.my-selector::before {
+    font-family: "test-font" !important;
     font-style: normal;
     font-weight: normal !important;
     font-variant: normal;
@@ -17,7 +18,7 @@ exports[`\`CSS\` asset generator > renders CSS correctly with \`selector\` optio
     -moz-osx-font-smoothing: grayscale;
 }
 
-.my-selector.tf-my-icon:before {
+.my-selector.tf-my-icon::before {
     content: "\\f101";
 }
 "
@@ -27,10 +28,11 @@ exports[`\`CSS\` asset generator > renders CSS correctly with prefix and tag nam
 "@font-face {
     font-family: "test-font";
     src: "::src-attr::";
+    font-display: block;
 }
 
-b[class^="tf-"]:before, b[class*=" tf-"]:before {
-    font-family: test-font !important;
+b[class^="tf-"]::before, b[class*=" tf-"]::before {
+    font-family: "test-font" !important;
     font-style: normal;
     font-weight: normal !important;
     font-variant: normal;
@@ -40,7 +42,7 @@ b[class^="tf-"]:before, b[class*=" tf-"]:before {
     -moz-osx-font-smoothing: grayscale;
 }
 
-.tf-my-icon:before {
+.tf-my-icon::before {
     content: "\\f101";
 }
 "

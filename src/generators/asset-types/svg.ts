@@ -4,8 +4,13 @@ import { FontGenerator } from '../../types/generator.js';
 
 type GglyphStream = ReadStream & { metadata?: any };
 
-const getUnicodeFromCodepoint = (id: string, codepoint: number): string => {
-  if (!Number.isInteger(codepoint) || codepoint < 0 || codepoint > 0x10ffff) {
+const getUnicodeFromCodepoint = (id: string, codepoint?: number): string => {
+  if (
+    codepoint === undefined ||
+    !Number.isInteger(codepoint) ||
+    codepoint < 0 ||
+    codepoint > 0x10ffff
+  ) {
     throw new Error(
       `Invalid codepoint for icon '${id}': ${codepoint}. Expected an integer between 0 and 1114111.`
     );
@@ -41,7 +46,7 @@ const generator: FontGenerator<void> = {
       try {
         for (const { id, absolutePath } of Object.values(assets)) {
           const glyph: GglyphStream = createReadStream(absolutePath);
-          const unicode = getUnicodeFromCodepoint(id, codepoints[id]);
+          const unicode = getUnicodeFromCodepoint(id, codepoints?.[id]);
 
           glyph.metadata = { name: id, unicode: [unicode] };
 

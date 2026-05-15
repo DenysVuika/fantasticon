@@ -108,9 +108,9 @@ const generator: FontGenerator = {
     assets,
     formatOptions: { ts } = {}
   }) => {
-    const quote = Boolean(ts?.singleQuotes) ? "'" : '"';
+    const quote = ts?.singleQuotes ? "'" : '"';
     const generateKind: Record<string, boolean> = (
-      Boolean(ts?.types?.length)
+      ts?.types?.length
         ? ts.types
         : ['enum', 'constant', 'literalId', 'literalKey']
     )

@@ -23,6 +23,6 @@ export const renderTemplate = async (
 
   return Handlebars.compile(template)(context, {
     ...options,
-    helpers: { ...TEMPLATE_HELPERS, ...(options.helpers || {}) }
+    helpers: { ...TEMPLATE_HELPERS, ...options.helpers }
   });
 };

@@ -6,9 +6,10 @@ exports[`\`SCSS\` asset generator > renders SCSS correctly with \`selector\` opt
 @font-face {
     font-family: $test-font;
     src: "::src-attr::";
+    font-display: block;
 }
 
-.my-selector:before {
+.my-selector::before {
     font-family: test !important;
     font-style: normal;
     font-weight: normal !important;
@@ -24,7 +25,7 @@ $test-map: (
 );
 
 @each $name, $value in ($test-map) {
-    .my-selector.tf-#{$name}:before {
+    .my-selector.tf-#{$name}::before {
         content: $value;
     }
 }
@@ -37,9 +38,10 @@ exports[`\`SCSS\` asset generator > renders SCSS correctly with prefix and tag n
 @font-face {
     font-family: $test-font;
     src: "::src-attr::";
+    font-display: block;
 }
 
-b[class^="tf-"]:before, b[class*=" tf-"]:before {
+b[class^="tf-"]::before, b[class*=" tf-"]::before {
     font-family: test !important;
     font-style: normal;
     font-weight: normal !important;
@@ -55,7 +57,7 @@ $test-map: (
 );
 
 @each $name, $value in ($test-map) {
-    .tf-#{$name}:before {
+    .tf-#{$name}::before {
         content: $value;
     }
 }

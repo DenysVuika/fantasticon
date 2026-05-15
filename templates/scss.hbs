@@ -3,12 +3,13 @@ ${{ name }}-font: "{{ name }}";
 @font-face {
     font-family: ${{ name }}-font;
     src: {{{ fontSrc }}};
+    font-display: block;
 }
 
 {{# if selector }}
-{{ selector }}:before {
+{{ selector }}::before {
 {{ else }}
-{{ tag }}[class^="{{prefix}}-"]:before, {{ tag }}[class*=" {{prefix}}-"]:before {
+{{ tag }}[class^="{{prefix}}-"]::before, {{ tag }}[class*=" {{prefix}}-"]::before {
 {{/ if }}
     font-family: {{ name }} !important;
     font-style: normal;
@@ -28,9 +29,9 @@ ${{ name }}-map: (
 
 @each $name, $value in (${{ name }}-map) {
     {{# if selector }}
-    {{ selector }}.{{ prefix }}-#{$name}:before {
+    {{ selector }}.{{ prefix }}-#{$name}::before {
     {{ else }}
-    .{{ prefix }}-#{$name}:before {
+    .{{ prefix }}-#{$name}::before {
     {{/ if }}
         content: $value;
     }

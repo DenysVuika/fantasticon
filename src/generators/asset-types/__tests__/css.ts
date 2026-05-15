@@ -53,7 +53,9 @@ describe('`CSS` asset generator', () => {
   it('renders expected selector blocks', async () => {
     const css = await cssGen.generate(mockOptions, Buffer.from(''));
 
-    expect(css).toContain('b[class^="tf-"]::before, b[class*=" tf-"]::before {');
+    expect(css).toContain(
+      'b[class^="tf-"]::before, b[class*=" tf-"]::before {'
+    );
     expect(css).toContain('.tf-my-icon::before {');
   });
 

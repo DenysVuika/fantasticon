@@ -36,7 +36,7 @@ describe('`WOFF2` font generator – integration', () => {
     // Build a real TTF from the SVG font so we can feed genuine bytes
     // into the generator without committing a binary fixture file.
     ttf = Buffer.from(svg2ttf(MINIMAL_SVG_FONT, { ts: 0 }).buffer);
-    result = await woff2Gen.generate(mockOptions(), ttf);
+    result = (await woff2Gen.generate(mockOptions(), ttf)) as Buffer;
   });
 
   it('produces a Buffer', () => {
@@ -66,7 +66,7 @@ describe('`WOFF2` font generator – integration', () => {
   });
 
   it('is deterministic: compressing the same TTF twice yields identical output', async () => {
-    const result2 = await woff2Gen.generate(mockOptions(), ttf);
+    const result2 = (await woff2Gen.generate(mockOptions(), ttf)) as Buffer;
     expect(result2).toEqual(result);
   });
 

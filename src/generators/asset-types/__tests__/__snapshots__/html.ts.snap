@@ -52,7 +52,7 @@ exports[`\`HTML\` asset generator > renders HTML correctly with prefix and tag n
         }
     </style>
 
-    <link rel="stylesheet" type="text/css" href="test-font.css" />
+    <link rel="stylesheet" type="text/css" href="test-font.css">
 </head>
 <body>
 
@@ -64,7 +64,7 @@ exports[`\`HTML\` asset generator > renders HTML correctly with prefix and tag n
                 <b class="tf tf-my-icon"></b>
             </span>
             <br>
-            <span class='label'>my-icon</span>
+            <span class="label">my-icon</span>
         </div>
 
 

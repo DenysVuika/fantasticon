@@ -3,9 +3,9 @@ import { FontAssetType, OtherAssetType } from '../types/misc.js';
 import { loadConfig, DEFAULT_FILEPATHS } from './config-loader.js';
 import { DEFAULT_OPTIONS } from '../constants.js';
 import { generateFonts } from '../core/runner.js';
-import { removeUndefined } from '../utils/validation.js';
 import { getLogger } from './logger.js';
 import { getPackageInfo } from '../utils/module.js';
+import { buildOptions } from './build-options.js';
 
 const packageInfo = getPackageInfo();
 
@@ -101,6 +101,11 @@ const config = () => {
         printDefaultOption('normalize')
     )
 
+    .option(
+      '--ts-quotes <value>',
+      'generate TypeScript strings with single or double quotes (default: double)'
+    )
+
     .option('-r, --round [bool]', 'setup the SVG path rounding [10e12]')
 
     .option(
@@ -127,30 +132,6 @@ const config = () => {
     .option('--debug', 'display errors stack trace' + printDefaultValue(false))
 
     .option('--silent', 'run with no logs' + printDefaultValue(false));
-};
-
-const buildOptions = async (cmd: commander.Command, loadedConfig = {}) => {
-  const [inputDir] = cmd.args;
-  const opts = cmd.opts();
-
-  return {
-    ...loadedConfig,
-    ...removeUndefined({
-      inputDir,
-      outputDir: opts.output,
-      name: opts.name,
-      fontTypes: opts.fontTypes,
-      assetTypes: opts.assetTypes,
-      fontHeight: opts.fontHeight,
-      descent: opts.descent,
-      normalize: opts.normalize,
-      round: opts.round,
-      selector: opts.selector,
-      tag: opts.tag,
-      prefix: opts.prefix,
-      fontsUrl: opts.fontsUrl
-    })
-  };
 };
 
 const run = async (options: any) => await generateFonts(options, true);

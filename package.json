@@ -60,7 +60,7 @@
     "svgicons2svgfont": "^15.0.1",
     "ttf2eot": "^3.1.0",
     "ttf2woff": "^3.0.0",
-    "ttf2woff2": "^8.0.0"
+    "wawoff2": "^2.0.1"
   },
   "devDependencies": {
     "@types/glob": "^9.0.0",
@@ -69,7 +69,7 @@
     "@types/svgicons2svgfont": "^14.0.0",
     "@types/ttf2eot": "^2.0.2",
     "@types/ttf2woff": "^2.0.4",
-    "@types/ttf2woff2": "^6.0.0",
+    "@types/wawoff2": "^1.0.2",
     "oxlint": "^1.64.0",
     "prettier": "^3.8.3",
     "rimraf": "^6.1.3",

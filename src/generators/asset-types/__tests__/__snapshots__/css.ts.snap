@@ -4,6 +4,7 @@ exports[`\`CSS\` asset generator > renders CSS correctly with \`selector\` optio
 "@font-face {
     font-family: "test-font";
     src: "::src-attr::";
+    font-display: block;
 }
 
 .my-selector::before {
@@ -27,6 +28,7 @@ exports[`\`CSS\` asset generator > renders CSS correctly with prefix and tag nam
 "@font-face {
     font-family: "test-font";
     src: "::src-attr::";
+    font-display: block;
 }
 
 b[class^="tf-"]::before, b[class*=" tf-"]::before {

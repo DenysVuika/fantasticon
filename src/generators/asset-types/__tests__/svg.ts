@@ -104,4 +104,23 @@ describe('`SVG` font generator', () => {
       normalize: false
     });
   });
+
+  it('supports 32-bit Unicode codepoints', async () => {
+    const options = mockOptions();
+    options.codepoints = { foo: 0x1f600, bar: 0x1f642 };
+
+    const result = await svgGen.generate(options, null);
+
+    expect(result).toContain('"unicode":["😀"]');
+    expect(result).toContain('"unicode":["🙂"]');
+  });
+
+  it('throws for invalid codepoints', async () => {
+    const options = mockOptions();
+    options.codepoints = { foo: undefined as any, bar: 1 };
+
+    await expect(svgGen.generate(options, null)).rejects.toThrow(
+      "Invalid codepoint for icon 'foo'"
+    );
+  });
 });

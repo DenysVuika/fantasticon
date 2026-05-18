@@ -13,24 +13,16 @@ const MOCK_GLOBS: Record<string, string[]> = {
   './empty/**/*.svg': []
 };
 
-export type GlobOptions = {
-  windowsPathsNoEscape?: boolean;
-  posix?: boolean;
-};
-
-let lastOptions: GlobOptions = {};
-
-const glob = async (pattern: string, options: GlobOptions = {}) => {
-  lastOptions = options;
+const glob = async function* (pattern: string): AsyncIterableIterator<string> {
   const paths = MOCK_GLOBS[pattern];
 
   if (!paths) {
     throw new Error(`Invalid glob: ${pattern}`);
   }
 
-  return paths;
+  for (const path of paths) {
+    yield path;
+  }
 };
 
-const getLastOptions = () => lastOptions;
-
-export { glob, getLastOptions };
+export { glob };

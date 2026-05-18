@@ -1,4 +1,4 @@
-import { glob } from 'glob';
+import { glob } from 'node:fs/promises';
 import { resolve, relative, join } from 'path';
 import { removeExtension, splitSegments } from '../utils/path.js';
 import { writeFile } from './fs-async.js';
@@ -23,10 +23,7 @@ export const ASSETS_EXTENSION = 'svg';
 
 export const loadPaths = async (dir: string): Promise<string[]> => {
   const globPath = join(dir, `**/*.${ASSETS_EXTENSION}`);
-  const files = await glob(globPath, {
-    windowsPathsNoEscape: true,
-    posix: true
-  });
+  const files = await Array.fromAsync(glob(globPath));
 
   if (!files.length) {
     throw new Error(`No SVGs found in ${dir}`);

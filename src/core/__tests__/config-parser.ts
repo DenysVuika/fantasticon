@@ -60,6 +60,9 @@ describe('Config parser', () => {
 
   it('correctly parses acceptable values', async () => {
     await testParsed('descent', undefined, undefined);
+    await testParsed('selector', undefined, undefined);
+    await testParsed('selector', null, null);
+    await testParsed('selector', '.my-class', '.my-class');
     await testParsed('descent', '1', 1);
     await testParsed('normalize', 'true', true);
     await testParsed('normalize', '1', true);

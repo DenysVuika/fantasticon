@@ -49,7 +49,9 @@ vi.mock('svgicons2svgfont', () => {
       chunk.on('end', () => {
         this.events.emit(
           'data',
-          Buffer.from(`processed->${content}|${JSON.stringify(chunk.metadata)}$`)
+          Buffer.from(
+            `processed->${content}|${JSON.stringify(chunk.metadata)}$`
+          )
         );
         this.pendingWrites -= 1;
         this.flushIfDone();

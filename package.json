@@ -53,7 +53,6 @@
   "prepublish": "build",
   "dependencies": {
     "commander": "^14.0.3",
-    "glob": "^13.0.6",
     "handlebars": "^4.7.9",
     "slugify": "^1.6.9",
     "svg2ttf": "^6.1.0",
@@ -63,7 +62,7 @@
     "wawoff2": "^2.0.1"
   },
   "devDependencies": {
-    "@types/node": "^25.8.0",
+    "@types/node": "^25.9.0",
     "@types/svg2ttf": "^5.0.3",
     "@types/ttf2eot": "^2.0.2",
     "@types/ttf2woff": "^2.0.4",

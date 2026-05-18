@@ -1,10 +1,12 @@
 import { AssetsMap } from '../utils/assets.js';
+import { CodepointsMap } from '../utils/codepoints.js';
 import { AssetType, OtherAssetType } from './misc.js';
 import { RunnerOptions } from './runner.js';
 import { FormatOptions } from './format.js';
 
 export type FontGeneratorOptions = RunnerOptions & {
   assets: AssetsMap;
+  codepoints: CodepointsMap;
   formatOptions: FormatOptions;
   templates: { [key in OtherAssetType]: string };
 };

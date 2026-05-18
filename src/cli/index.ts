@@ -24,7 +24,7 @@ const cli = async () => {
     logger.start(loadedConfigPath);
     logger.results(results);
   } catch (error) {
-    logger.error(error);
+    logger.error(error instanceof Error ? error : String(error));
     process.exitCode = 1;
   }
 };
@@ -44,7 +44,7 @@ const printDefaultValue = (value: any) => {
   return ` (default: ${printVal})`;
 };
 
-const printDefaultOption = (key: string) =>
+const printDefaultOption = (key: keyof typeof DEFAULT_OPTIONS) =>
   printDefaultValue(DEFAULT_OPTIONS[key]);
 
 const printConfigPaths = () => DEFAULT_FILEPATHS.join(' | ');
@@ -75,13 +75,13 @@ const config = () => {
     .option(
       '-t, --font-types <value...>',
       `specify font formats to generate` +
-        printList(FontAssetType, DEFAULT_OPTIONS.fontTypes)
+        printList(FontAssetType, DEFAULT_OPTIONS.fontTypes as string[])
     )
 
     .option(
       '-g --asset-types <value...>',
       `specify other asset types to generate` +
-        printList(OtherAssetType, DEFAULT_OPTIONS.assetTypes)
+        printList(OtherAssetType, DEFAULT_OPTIONS.assetTypes as string[])
     )
 
     .option(

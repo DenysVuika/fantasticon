@@ -21,7 +21,7 @@ export const getGeneratorOptions = (
   formatOptions: prefillOptions<AssetType, {}, FormatOptions>(
     Object.values(ASSET_TYPES),
     options.formatOptions,
-    assetType => DEFAULT_OPTIONS.formatOptions[assetType] || {}
+    assetType => (DEFAULT_OPTIONS.formatOptions as any)?.[assetType] || {}
   ),
   templates: prefillOptions<OtherAssetType, string>(
     ASSET_TYPES_WITH_TEMPLATE,

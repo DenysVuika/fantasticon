@@ -50,14 +50,25 @@ export const loadAssets = async ({
   inputDir,
   getIconId
 }: RunnerOptions): Promise<AssetsMap> => {
+  if (!inputDir) {
+    throw new Error('inputDir is required');
+  }
+  if (!getIconId) {
+    throw new Error('getIconId is required');
+  }
+
   const paths = await loadPaths(inputDir);
-  const out = {};
+  const out: AssetsMap = {};
   let index = 0;
 
   for (const path of paths) {
     const relativePath = relative(resolve(inputDir), resolve(path));
     const parts = splitSegments(relativePath);
-    const basename = removeExtension(parts.pop());
+    const lastPart = parts.pop();
+    if (!lastPart) {
+      throw new Error(`Invalid path: ${path}`);
+    }
+    const basename = removeExtension(lastPart);
     const absolutePath = resolve(path);
     const iconId = getIconId({
       basename,
@@ -85,13 +96,24 @@ export const writeAssets = async (
   assets: GeneratedAssets,
   { name, pathOptions = {}, outputDir }: RunnerOptions
 ) => {
+  if (!name) {
+    throw new Error('name is required');
+  }
+  if (!outputDir) {
+    throw new Error('outputDir is required');
+  }
+
   const results: WriteResults = [];
 
   for (const ext of Object.keys(assets)) {
     const filename = [name, ext].join('.');
-    const writePath = pathOptions[ext] || join(outputDir, filename);
-    results.push({ content: assets[ext], writePath });
-    await writeFile(writePath, assets[ext]);
+    const assetType = ext as keyof typeof pathOptions;
+    const writePath = pathOptions[assetType] || join(outputDir, filename);
+    const content = assets[ext as keyof GeneratedAssets];
+    if (content) {
+      results.push({ content, writePath });
+      await writeFile(writePath, content);
+    }
   }
 
   return results;

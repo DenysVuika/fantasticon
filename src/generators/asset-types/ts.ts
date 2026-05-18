@@ -108,6 +108,10 @@ const generator: FontGenerator = {
     assets,
     formatOptions: { ts } = {}
   }) => {
+    if (!name) {
+      throw new Error('name is required for TS generation');
+    }
+
     const quote = ts?.singleQuotes ? "'" : '"';
     const generateKind: Record<string, boolean> = (
       ts?.types?.length

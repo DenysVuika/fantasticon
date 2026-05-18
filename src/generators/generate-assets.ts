@@ -10,9 +10,14 @@ export const generateAssets = async (
   options: FontGeneratorOptions
 ): Promise<GeneratedAssets> => {
   const generated: GeneratedAssets = {};
-  const generateTypes = [...options.fontTypes, ...options.assetTypes];
+  const generateTypes = [
+    ...(options.fontTypes || []),
+    ...(options.assetTypes || [])
+  ];
 
-  const generateAsset = async (type: AssetType) => {
+  const generateAsset = async (
+    type: AssetType
+  ): Promise<string | Buffer | undefined> => {
     if (generated[type]) {
       return generated[type];
     }

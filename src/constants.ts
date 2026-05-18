@@ -23,7 +23,7 @@ export const DEFAULT_OPTIONS: Omit<RunnerOptions, 'inputDir' | 'outputDir'> = {
   fontHeight: 300,
   descent: undefined,
   normalize: undefined,
-  selector: null,
+  selector: undefined,
   tag: 'i',
   prefix: 'icon',
   fontsUrl: undefined,

@@ -22,8 +22,15 @@ export const renderSrcAttribute = (
   { name, fontTypes, fontsUrl }: FontGeneratorOptions,
   font: string | Buffer,
   { inline = false }: { inline?: boolean } = {}
-) =>
-  fontTypes
+) => {
+  if (!name) {
+    throw new Error('name is required for CSS generation');
+  }
+  if (!fontTypes || fontTypes.length === 0) {
+    throw new Error('fontTypes is required for CSS generation');
+  }
+
+  return fontTypes
     .map(fontType => {
       const { formatValue, getSuffix } = renderSrcOptions[fontType];
       const hash = getHash(font.toString('utf8'));
@@ -33,3 +40,4 @@ export const renderSrcAttribute = (
       }/${name}.${fontType}?${hash}${suffix}") format("${formatValue}")`;
     })
     .join(inline ? ', ' : ',\n');
+};

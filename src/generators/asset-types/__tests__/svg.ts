@@ -176,4 +176,22 @@ describe('`SVG` font generator', () => {
     // reaches the mock stream without a parse error.
     expect(result).toContain('-6.853,10.646,0,10.646z');
   });
+
+  it('strips trailing whitespace in attribute values to prevent NaN polygon coordinates', async () => {
+    // svgicons2svgfont@16 processes <polygon> even inside <defs>.
+    // A trailing space in `points` causes split(/\s/) to yield an empty
+    // string → parseFloat("") = NaN → SVGShapes.createPolygon encodes NaN
+    // into path data → svg-pathdata@9 throws "Unexpected character N".
+    const svgWithTrailingSpace =
+      '<svg xmlns="http://www.w3.org/2000/svg">' +
+      '<polygon points="11,14 11,0 0,0 0,14 "/>' +
+      '</svg>';
+    readFileMock.mockResolvedValueOnce(svgWithTrailingSpace);
+
+    const result = await svgGen.generate(mockOptions(), null);
+
+    // The trailing space is stripped so points="11,14 11,0 0,0 0,14" and
+    // no NaN coordinate is generated.
+    expect(result).not.toContain('NaN');
+  });
 });

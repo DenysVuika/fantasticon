@@ -6,9 +6,14 @@ import { FontGenerator } from '../../types/generator.js';
 type GglyphStream = NodeJS.ReadableStream & { metadata?: any };
 
 const sanitizeSvg = (svg: string): string =>
+  // normalize line-wrapped attribute values (sax.js doesn't per XML spec)
   svg
-    .replace(/[\r\n\t]+/g, ' ') // normalize line-wrapped attribute values (sax.js doesn't per XML spec)
-    .replace(/\bNaN\b/g, '0'); // replace any NaN tokens left by bad tooling
+    .replace(/[\r\n\t]+/g, ' ')
+    // strip trailing spaces inside attribute values — prevents trailing-space
+    // in `points="... "` from producing NaN via parseFloat("") after split
+    .replace(/ +"/g, '"')
+    // replace any NaN tokens left by bad tooling
+    .replace(/\bNaN\b/g, '0');
 
 const createGlyphStream = async (
   absolutePath: string

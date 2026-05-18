@@ -1,4 +1,5 @@
 import * as _SVGIcons2SVGFontStream from 'svgicons2svgfont';
+import { readFile } from 'fs/promises';
 import { FontAssetType } from '../../../types/misc';
 import { FontGeneratorOptions } from '../../../types/generator';
 import { vi, it, describe, beforeEach, expect, Mock } from 'vitest';
@@ -10,10 +11,10 @@ const mockConstuctor = (
   }
 ).mockConstuctor;
 
-vi.mock('fs', () => ({
-  createReadStream: (filepath: string) => ({
-    content: `content->${filepath}`
-  })
+const readFileMock = readFile as unknown as Mock;
+
+vi.mock('fs/promises', () => ({
+  readFile: vi.fn((filepath: string) => Promise.resolve(`content->${filepath}`))
 }));
 
 vi.mock('svgicons2svgfont', () => {
@@ -24,18 +25,42 @@ vi.mock('svgicons2svgfont', () => {
   class MockStream {
     public events = new EventEmitter();
     public content = '';
+    private pendingWrites = 0;
+    private endRequested = false;
 
     constructor(...args: any[]) {
       mockConstuctor(...args);
     }
 
+    private flushIfDone() {
+      if (this.endRequested && this.pendingWrites === 0) {
+        this.events.emit('end');
+      }
+    }
+
     public write(chunk: any) {
-      this.events.emit(
-        'data',
-        Buffer.from(
-          `processed->${chunk.content}|${JSON.stringify(chunk.metadata)}$`
-        )
-      );
+      this.pendingWrites += 1;
+      let content = '';
+
+      chunk.on('data', (data: Buffer | string) => {
+        content += Buffer.isBuffer(data) ? data.toString('utf8') : String(data);
+      });
+
+      chunk.on('end', () => {
+        this.events.emit(
+          'data',
+          Buffer.from(
+            `processed->${content}|${JSON.stringify(chunk.metadata)}$`
+          )
+        );
+        this.pendingWrites -= 1;
+        this.flushIfDone();
+      });
+
+      chunk.on('error', (error: Error) => {
+        this.events.emit('error', error);
+      });
+
       return this;
     }
 
@@ -45,7 +70,8 @@ vi.mock('svgicons2svgfont', () => {
     }
 
     public end() {
-      this.events.emit('end');
+      this.endRequested = true;
+      this.flushIfDone();
       return this;
     }
   }
@@ -70,6 +96,9 @@ const mockOptions = (svgOptions = { __mock: 'options__' } as any) =>
 describe('`SVG` font generator', () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    readFileMock.mockImplementation((filepath: any) =>
+      Promise.resolve(`content->${filepath}`)
+    );
   });
 
   it('resolves with the result of the completed `SVGIcons2SVGFontStream`', async () => {
@@ -122,5 +151,29 @@ describe('`SVG` font generator', () => {
     await expect(svgGen.generate(options, null)).rejects.toThrow(
       "Invalid codepoint for icon 'foo'"
     );
+  });
+
+  it('sanitizes NaN tokens in SVG content before parsing', async () => {
+    readFileMock.mockResolvedValueOnce('M10,NaN L20,30');
+
+    const result = await svgGen.generate(mockOptions(), null);
+
+    expect(result).toContain('M10,0 L20,30');
+  });
+
+  it('normalizes line-wrapped path data (svgicons2svgfont@16 / svg-pathdata@9 strictness)', async () => {
+    // SVG editors like Inkscape wrap long `d` attributes across lines;
+    // sax.js preserves the raw newlines, which svg-pathdata@9 rejects.
+    const wrappedSvg =
+      '<svg xmlns="http://www.w3.org/2000/svg">' +
+      '<path d="M60.859,112.533c-6.853,0\n\t\t\t-6.853,10.646,0,10.646z"/>' +
+      '</svg>';
+    readFileMock.mockResolvedValueOnce(wrappedSvg);
+
+    const result = await svgGen.generate(mockOptions(), null);
+
+    // The newline+tabs should have been collapsed to a space so the path
+    // reaches the mock stream without a parse error.
+    expect(result).toContain('-6.853,10.646,0,10.646z');
   });
 });

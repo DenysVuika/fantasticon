@@ -28,7 +28,7 @@ const CONFIG_VALIDATORS: {
   descent: [optional(parseNumeric)],
   normalize: [optional(parseBoolean)],
   round: [optional(parseNumeric)],
-  selector: [nullable(parseString)],
+  selector: [optional(nullable(parseString))],
   tag: [parseString],
   prefix: [parseString],
   fontsUrl: [optional(parseString)],

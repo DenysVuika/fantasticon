@@ -52,7 +52,7 @@
   ],
   "prepublish": "build",
   "dependencies": {
-    "commander": "^14.0.3",
+    "commander": "^15.0.0",
     "handlebars": "^4.7.9",
     "slugify": "^1.6.9",
     "svg2ttf": "^6.1.0",

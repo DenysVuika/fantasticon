@@ -2,34 +2,40 @@
   "name": "@denysvuika/fantasticon",
   "version": "0.0.0",
   "description": "Icon font generation tool",
+  "keywords": [
+    "fonts",
+    "iconfonts",
+    "icons",
+    "svg",
+    "vector"
+  ],
+  "homepage": "https://github.com/DenysVuika/fantasticon#readme",
+  "bugs": {
+    "url": "https://github.com/DenysVuika/fantasticon/issues"
+  },
+  "license": "MIT",
+  "author": "Denys Vuika",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/DenysVuika/fantasticon.git"
   },
-  "keywords": [
-    "icons",
-    "fonts",
-    "iconfonts",
-    "svg",
-    "vector"
-  ],
-  "author": "Denys Vuika",
-  "bugs": {
-    "url": "https://github.com/DenysVuika/fantasticon/issues"
+  "bin": {
+    "fantasticon": "bin/fantasticon"
   },
-  "homepage": "https://github.com/DenysVuika/fantasticon#readme",
+  "files": [
+    "bin/fantasticon",
+    "dist/**/*",
+    "!dist/**/{__mocks__,__tests__}/",
+    "templates/*.hbs"
+  ],
   "type": "module",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
   "exports": {
     "require": "./dist/index.cjs",
     "import": "./dist/index.js"
   },
-  "main": "dist/index.cjs",
-  "module": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "bin": {
-    "fantasticon": "bin/fantasticon"
-  },
-  "license": "MIT",
   "scripts": {
     "test": "vitest run",
     "test:watch": "vitest dev",
@@ -41,16 +47,9 @@
     "build:esm": "tsc --project ./tsconfig.json && npm run build:package:esm",
     "watch": "npm run ts -- --watch",
     "typecheck": "tsc --noEmit --project tsconfig.test.json --noEmit",
-    "lint": "oxlint && prettier --check .",
-    "fix": "prettier --write ."
+    "lint": "oxlint && oxfmt --check .",
+    "fix": "oxfmt --write ."
   },
-  "files": [
-    "bin/fantasticon",
-    "dist/**/*",
-    "!dist/**/{__mocks__,__tests__}/",
-    "templates/*.hbs"
-  ],
-  "prepublish": "build",
   "dependencies": {
     "commander": "^14.0.3",
     "handlebars": "^4.7.9",
@@ -67,8 +66,8 @@
     "@types/ttf2eot": "^2.0.2",
     "@types/ttf2woff": "^2.0.4",
     "@types/wawoff2": "^1.0.2",
+    "oxfmt": "^0.62.0",
     "oxlint": "^1.67.0",
-    "prettier": "^3.9.4",
     "rimraf": "^6.1.3",
     "semantic-release": "^25.0.5",
     "tsup": "^8.5.1",
@@ -77,8 +76,8 @@
   },
   "jest": {
     "preset": "ts-jest",
-    "testEnvironment": "node",
     "rootDir": "./src",
+    "testEnvironment": "node",
     "transform": {
       "^.+\\.tsx?$": [
         "ts-jest",
@@ -90,5 +89,6 @@
   },
   "engines": {
     "node": ">= 24.14.0"
-  }
+  },
+  "prepublish": "build"
 }

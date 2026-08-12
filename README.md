@@ -20,7 +20,7 @@ nvm use
 ```
 
 ```bash
-npm install -g @denysvuika/fantasticon
+pnpm add -g @denysvuika/fantasticon
 ```
 
 ## Use

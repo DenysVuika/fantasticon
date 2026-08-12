@@ -38,17 +38,9 @@
   },
   "scripts": {
     "test": "vitest run",
-    "test:watch": "vitest dev",
-    "build": "rimraf dist && npm run ts",
-    "ts": "tsup --dts --format esm,cjs src/index.ts src/cli/index.ts",
-    "build:package:cjs": "touch ./dist/cjs/package.json && echo '{\"type\": \"commonjs\"}' > ./dist/cjs/package.json",
-    "build:cjs": "tsc --project ./tsconfig.cjs.json && npm run build:package:cjs",
-    "build:package:esm": "touch ./dist/esm/package.json && echo '{\"type\": \"module\"}' > ./dist/esm/package.json",
-    "build:esm": "tsc --project ./tsconfig.json && npm run build:package:esm",
-    "watch": "npm run ts -- --watch",
+    "build": "rimraf dist && tsup",
     "typecheck": "tsc --noEmit --project tsconfig.test.json --noEmit",
-    "lint": "oxlint && oxfmt --check .",
-    "fix": "oxfmt --write ."
+    "lint": "oxlint && oxfmt --check ."
   },
   "dependencies": {
     "commander": "^15.0.0",
@@ -90,5 +82,6 @@
   "engines": {
     "node": ">= 24.14.0"
   },
+  "packageManager": "pnpm@10.12.4",
   "prepublish": "build"
 }

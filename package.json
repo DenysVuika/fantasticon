@@ -44,7 +44,7 @@
   },
   "dependencies": {
     "commander": "^15.0.0",
-    "handlebars": "^4.7.9",
+    "handlebars": "^4.7.10",
     "slugify": "^1.6.9",
     "svg2ttf": "^6.1.0",
     "svgicons2svgfont": "^16.0.0",
